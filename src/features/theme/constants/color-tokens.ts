@@ -14,6 +14,11 @@ export const getPaletteTokens = (mode: PaletteMode): PaletteOptions => ({
           light: "#E8F7FF",
           dark: "#23afdb",
         },
+        border: {
+          main: "#465670",
+          light: "#EAEFF4",
+          dark: "#2A3447",
+        },
         success: {
           main: "#13DEB9",
           light: "#E6FFFA",
@@ -61,6 +66,11 @@ export const getPaletteTokens = (mode: PaletteMode): PaletteOptions => ({
           hover: "#f6f9fc",
         },
         divider: "#e5eaef",
+        background: {
+          default: "#2A3447FF",
+          paper: "#2A3447FF",
+          primary: "#2A3447",
+        },
       }
     : {
         primary: {
@@ -72,6 +82,11 @@ export const getPaletteTokens = (mode: PaletteMode): PaletteOptions => ({
           main: "#23afdb",
           light: "#E8F7FF",
           dark: "#0f4b5b",
+        },
+        border: {
+          main: "#465670",
+          light: "#EAEFF4",
+          dark: "#2A3447",
         },
         success: {
           main: "#02b3a9",
@@ -121,8 +136,8 @@ export const getPaletteTokens = (mode: PaletteMode): PaletteOptions => ({
         },
         divider: "#2A3547",
         background: {
-          default: "#2A3447FF",
-          paper: "#2A3447FF",
+          default: "#2A3447",
+          paper: "#2A3447",
         },
       }),
 });

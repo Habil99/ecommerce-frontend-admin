@@ -1,4 +1,4 @@
-import { PaletteColorOptions } from "@mui/material";
+import { PaletteColorOptions, SimplePaletteColorOptions } from "@mui/material";
 
 interface CustomPaletteColorOptions extends PaletteColorOptions {
   A50: string;
@@ -8,6 +8,7 @@ interface CustomPaletteColorOptions extends PaletteColorOptions {
 
 interface CustomPalettes {
   purple?: CustomPaletteColorOptions;
+  border?: SimplePaletteColorOptions;
 }
 
 declare module "@mui/material/styles" {
@@ -16,4 +17,8 @@ declare module "@mui/material/styles" {
 
 declare module "@mui/material/styles/createPalette" {
   interface Palette extends CustomPalettes {}
+
+  interface TypeBackground {
+    primary: string;
+  }
 }

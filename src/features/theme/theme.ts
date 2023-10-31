@@ -6,24 +6,25 @@ export const getTheme = (mode: PaletteMode): Theme =>
     direction: "ltr",
     palette: getPaletteTokens(mode),
     typography: {
-      fontFamily: "'Plus Jakarta Sans', sans-serif;",
+      fontFamily: "'Poppins', sans-serif;",
+      fontSize: 16,
       h1: {
         fontWeight: 600,
         fontSize: "2.25rem",
         lineHeight: "2.75rem",
-        fontFamily: "'Plus Jakarta Sans', sans-serif;",
+        fontFamily: "'Poppins', sans-serif;",
       },
       h2: {
         fontWeight: 600,
         fontSize: "1.875rem",
         lineHeight: "2.25rem",
-        fontFamily: "'Plus Jakarta Sans', sans-serif;",
+        fontFamily: "'Poppins', sans-serif;",
       },
       h3: {
         fontWeight: 600,
         fontSize: "1.5rem",
         lineHeight: "1.75rem",
-        fontFamily: "'Plus Jakarta Sans', sans-serif;",
+        fontFamily: "'Poppins', sans-serif;",
       },
       h4: {
         fontWeight: 600,
@@ -91,4 +92,39 @@ export const getTheme = (mode: PaletteMode): Theme =>
       "0 0 1px 0 rgba(0,0,0,0.31), 0 22px 34px -8px rgba(0,0,0,0.25)",
       "0 0 1px 0 rgba(0,0,0,0.31), 0 24px 36px -8px rgba(0,0,0,0.25)",
     ],
+    components: {
+      MuiInputLabel: {
+        styleOverrides: {
+          root: ({ theme }) => ({
+            transform: "none",
+            position: "relative",
+            marginBottom: "0.5rem",
+            color: theme.palette.text.primary,
+            "&.Mui-focused": {
+              color: theme.palette.text.primary,
+            },
+          }),
+        },
+      },
+      MuiInputBase: {
+        styleOverrides: {
+          input: ({ theme }) => ({
+            borderRadius: 4,
+            position: "relative",
+            border: "1px solid",
+            borderColor: theme.palette.border?.main,
+            fontSize: 16,
+            padding: "12px 14px",
+            "&:focus": {
+              borderColor: theme.palette.primary.main,
+            },
+            transition: theme.transitions.create([
+              "border-color",
+              "background-color",
+              "box-shadow",
+            ]),
+          }),
+        },
+      },
+    },
   });
