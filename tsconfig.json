@@ -22,13 +22,16 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "paths": {
-      "@*": [
-        "./src/*"
+      "@/*": [
+        "./src/*",
+        "./public/*",
+        ""
       ]
     }
   },
   "include": [
-    "src"
+    "src/**/*",
+    "types/**/*"
   ],
   "references": [
     {

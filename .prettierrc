@@ -10,5 +10,17 @@
   "arrowParens": "always",
   "proseWrap": "never",
   "htmlWhitespaceSensitivity": "strict",
-  "endOfLine": "lf"
+  "endOfLine": "lf",
+  "max-len": [
+    "error",
+    {
+      "code": 80,
+      "ignoreComments": true,
+      "ignoreTrailingComments": true,
+      "ignoreUrls": true,
+      "ignoreStrings": true,
+      "ignoreTemplateLiterals": true,
+      "ignoreRegExpLiterals": true
+    }
+  ]
 }
