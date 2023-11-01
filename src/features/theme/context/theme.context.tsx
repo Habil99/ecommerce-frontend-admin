@@ -51,7 +51,7 @@ export const AppThemeProvider: FC<PropsWithChildren> = ({ children }) => {
   useEffect(() => {
     localStorage.setItem("theme", mode);
   }, [mode]);
-  console.log(mode);
+
   return (
     <AppThemeContext.Provider
       value={{

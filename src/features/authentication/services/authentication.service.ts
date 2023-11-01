@@ -30,9 +30,10 @@ export const authenticationService = createApi({
       }),
     }),
     confirmEmail: builder.mutation<ConfirmEmailResponse, ConfirmEmailRequest>({
-      query: () => ({
+      query: ({ otpCode, emailToken }) => ({
         url: "/auth/confirm-email",
         method: "POST",
+        data: { otpCode, emailToken },
       }),
     }),
   }),

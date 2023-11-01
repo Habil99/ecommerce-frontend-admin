@@ -8,4 +8,7 @@ export type SignInResponse = {
 
 export type SignUpResponse = User;
 
-export type ConfirmEmailResponse = SignInResponse;
+export type ConfirmEmailResponse = {
+  success: boolean;
+  message: string;
+};

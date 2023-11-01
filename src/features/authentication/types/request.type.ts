@@ -11,5 +11,6 @@ export type SignUpRequest = {
 };
 
 export type ConfirmEmailRequest = {
-  token: string;
+  emailToken: string;
+  otpCode: number;
 };
