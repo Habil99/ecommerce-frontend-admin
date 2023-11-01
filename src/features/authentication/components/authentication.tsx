@@ -1,10 +1,14 @@
-import { Outlet } from "react-router-dom";
-import { alpha, Box, Container, Paper, styled, useTheme } from "@mui/material";
+import { Navigate, Outlet } from "react-router-dom";
+import { alpha, Box, Paper, styled } from "@mui/material";
 import { StandardCSSProperties } from "@mui/system";
 import darkLogo from "@/assets/dark-logo.svg";
 import lightLogo from "@/assets/light-logo.svg";
+import { useContext } from "react";
+import { AppThemeContext } from "@/features/theme";
+import { getIsAuthenticated, useAppSelector } from "@/store";
+import { shallowEqual } from "react-redux";
 
-const StyledAuthenticationContainer = styled(Container)(
+const StyledAuthenticationContainer = styled(Box)(
   ({ theme }): Partial<StandardCSSProperties> => ({
     width: "100%",
     minHeight: "100vh",
@@ -27,10 +31,13 @@ const StyledAuthenticationBox = styled(Paper)(
   })
 );
 
-export const Authentication = () => {
-  const {
-    palette: { mode },
-  } = useTheme();
+const Authentication = () => {
+  const { mode } = useContext(AppThemeContext);
+  const isAuthenticated = useAppSelector(getIsAuthenticated, shallowEqual);
+
+  if (isAuthenticated) {
+    return <Navigate to="/" replace />;
+  }
 
   return (
     <StyledAuthenticationContainer>
@@ -43,3 +50,5 @@ export const Authentication = () => {
     </StyledAuthenticationContainer>
   );
 };
+
+export default Authentication;

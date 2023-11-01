@@ -4,9 +4,11 @@ import {
   InputBase,
   InputLabel,
   Stack,
+  Typography,
 } from "@mui/material";
+import { AppLink } from "@/components";
 
-export const SignUp = () => {
+const SignUp = () => {
   return (
     <Stack gap={3}>
       <FormControl variant={"standard"}>
@@ -25,9 +27,17 @@ export const SignUp = () => {
         <InputLabel htmlFor="password">Password</InputLabel>
         <InputBase id="password" />
       </FormControl>
-      <Button variant="contained" color="primary">
+      <Button variant="contained" color="primary" size="large">
         Sign In
       </Button>
+      <Typography textAlign="center" color="grey.100" fontWeight="medium">
+        Already have an account ?
+        <AppLink ml={1} to="/auth/sign-in" color="primary" underline="hover">
+          Sign in
+        </AppLink>
+      </Typography>
     </Stack>
   );
 };
+
+export default SignUp;

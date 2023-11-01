@@ -15,7 +15,7 @@ export const getPaletteTokens = (mode: PaletteMode): PaletteOptions => ({
           dark: "#23afdb",
         },
         border: {
-          main: "#465670",
+          main: "#424F5FE4",
           light: "#EAEFF4",
           dark: "#2A3447",
         },
@@ -67,9 +67,9 @@ export const getPaletteTokens = (mode: PaletteMode): PaletteOptions => ({
         },
         divider: "#e5eaef",
         background: {
-          default: "#2A3447FF",
-          paper: "#2A3447FF",
-          primary: "#2A3447",
+          default: "#e5eaef",
+          paper: "#e5eaef",
+          primary: "#e5eaef",
         },
       }
     : {

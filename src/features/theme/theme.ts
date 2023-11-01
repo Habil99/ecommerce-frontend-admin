@@ -93,6 +93,15 @@ export const getTheme = (mode: PaletteMode): Theme =>
       "0 0 1px 0 rgba(0,0,0,0.31), 0 24px 36px -8px rgba(0,0,0,0.25)",
     ],
     components: {
+      MuiOutlinedInput: {
+        styleOverrides: {
+          root: {
+            ["& .MuiOutlinedInput-notchedOutline"]: {
+              display: "none",
+            },
+          },
+        },
+      },
       MuiInputLabel: {
         styleOverrides: {
           root: ({ theme }) => ({
@@ -113,8 +122,8 @@ export const getTheme = (mode: PaletteMode): Theme =>
             position: "relative",
             border: "1px solid",
             borderColor: theme.palette.border?.main,
-            fontSize: 16,
-            padding: "12px 14px",
+            fontSize: 14,
+            padding: "12px 14px !important",
             "&:focus": {
               borderColor: theme.palette.primary.main,
             },
@@ -123,6 +132,13 @@ export const getTheme = (mode: PaletteMode): Theme =>
               "background-color",
               "box-shadow",
             ]),
+          }),
+        },
+      },
+      MuiAlert: {
+        styleOverrides: {
+          standardError: ({ theme }) => ({
+            backgroundColor: theme.palette.error.dark,
           }),
         },
       },

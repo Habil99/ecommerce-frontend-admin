@@ -12,7 +12,7 @@ import { getTheme } from "@/features/theme";
 
 const DEFAULT_FORCED_MODE = "dark";
 
-export const AppTheme = createContext<ThemeContextType>({
+export const AppThemeContext = createContext<ThemeContextType>({
   theme: getTheme(DEFAULT_FORCED_MODE),
   mode: DEFAULT_FORCED_MODE,
   toggleMode: () => {},
@@ -51,9 +51,9 @@ export const AppThemeProvider: FC<PropsWithChildren> = ({ children }) => {
   useEffect(() => {
     localStorage.setItem("theme", mode);
   }, [mode]);
-
+  console.log(mode);
   return (
-    <AppTheme.Provider
+    <AppThemeContext.Provider
       value={{
         theme,
         mode,
@@ -61,6 +61,6 @@ export const AppThemeProvider: FC<PropsWithChildren> = ({ children }) => {
       }}
     >
       <ThemeProvider theme={theme}>{children}</ThemeProvider>
-    </AppTheme.Provider>
+    </AppThemeContext.Provider>
   );
 };
