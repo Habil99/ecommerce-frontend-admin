@@ -1,16 +1,23 @@
 import {
+  getIsAuthenticated,
   setIsAuthenticated,
   setTokens,
   setUser,
   useAppDispatch,
+  useAppSelector,
 } from "@/store";
 import { FC, PropsWithChildren, useEffect } from "react";
 import { useLazyGetCurrentUserQuery } from "@/services";
 import { LoadingScreen } from "@/components";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
+import { shallowEqual } from "react-redux";
 
 export const Content: FC<PropsWithChildren> = ({ children }) => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const isAuthenticated = useAppSelector(getIsAuthenticated, shallowEqual);
+
   const [getCurrentUser, { isLoading, isError }] = useLazyGetCurrentUserQuery();
 
   useEffect(() => {
@@ -19,11 +26,17 @@ export const Content: FC<PropsWithChildren> = ({ children }) => {
 
     getCurrentUser()
       .unwrap()
-      .then((response) => {
-        dispatch(setUser(response));
-        dispatch(setIsAuthenticated(!!accessToken));
-        if (accessToken && refreshToken) {
-          dispatch(setTokens({ accessToken, refreshToken }));
+      .then((user) => {
+        if (user.isConfirmed && user.isActive) {
+          dispatch(setUser(user));
+          dispatch(setIsAuthenticated(!!accessToken));
+          if (accessToken && refreshToken) {
+            dispatch(setTokens({ accessToken, refreshToken }));
+          }
+        }
+
+        if (!user.isConfirmed) {
+          navigate("/auth/confirm-email");
         }
       })
       .catch(() => {
@@ -39,5 +52,8 @@ export const Content: FC<PropsWithChildren> = ({ children }) => {
     return <Navigate to="/auth/sign-in" />;
   }
 
-  return children;
+  if (isAuthenticated) {
+    return children;
+  }
+  return null;
 };

@@ -26,8 +26,7 @@ export const useSignIn = () => {
     []
   );
 
-  const [signIn, { error, isError, isLoading, isSuccess }] =
-    useSignInMutation();
+  const [signIn, { error, isError, isLoading }] = useSignInMutation();
 
   const formik = useFormik<SignInRequest>({
     initialValues: {
@@ -41,6 +40,19 @@ export const useSignIn = () => {
         .then((response) => {
           const { user, accessToken, refreshToken } = response;
 
+          if (!user.isConfirmed) {
+            toast.error(
+              "Your email is not confirmed. Please confirm your email"
+            );
+            return navigate("/auth/confirm-email", {
+              state: { email: user.email },
+            });
+          }
+
+          if (!user.isActive) {
+            return toast.error("Your account is not active");
+          }
+
           localStorage.setItem("accessToken", accessToken);
           localStorage.setItem("refreshToken", refreshToken);
 
@@ -52,6 +64,9 @@ export const useSignIn = () => {
           );
           dispatch(setUser(user));
           dispatch(setIsAuthenticated(true));
+
+          toast.success("You have successfully signed in");
+          navigate("/");
         }),
     enableReinitialize: true,
   });
@@ -64,13 +79,6 @@ export const useSignIn = () => {
       });
     }
   }, [isError]);
-
-  useEffect(() => {
-    if (isSuccess) {
-      toast.success("You have successfully signed in");
-      navigate("/");
-    }
-  }, [isSuccess]);
 
   const getFieldsPropsByName = (name: keyof SignInRequest) => {
     const fieldsProps = formik.getFieldProps(name);
