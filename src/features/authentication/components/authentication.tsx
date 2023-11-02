@@ -1,12 +1,9 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { alpha, Box, Paper, styled } from "@mui/material";
 import { StandardCSSProperties } from "@mui/system";
-import darkLogo from "@/assets/dark-logo.svg";
-import lightLogo from "@/assets/light-logo.svg";
-import { useContext } from "react";
-import { AppThemeContext } from "@/features/theme";
 import { getIsAuthenticated, useAppSelector } from "@/store";
 import { shallowEqual } from "react-redux";
+import { Logo } from "@/components";
 
 const StyledAuthenticationContainer = styled(Box)(
   ({ theme }): Partial<StandardCSSProperties> => ({
@@ -32,7 +29,6 @@ const StyledAuthenticationBox = styled(Paper)(
 );
 
 const Authentication = () => {
-  const { mode } = useContext(AppThemeContext);
   const isAuthenticated = useAppSelector(getIsAuthenticated, shallowEqual);
 
   if (isAuthenticated) {
@@ -43,7 +39,7 @@ const Authentication = () => {
     <StyledAuthenticationContainer>
       <StyledAuthenticationBox>
         <Box mb={4} display="flex" justifyContent="center">
-          <img src={mode === "light" ? darkLogo : lightLogo} alt="logo" />
+          <Logo />
         </Box>
         <Outlet />
       </StyledAuthenticationBox>

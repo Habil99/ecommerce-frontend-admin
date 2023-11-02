@@ -46,15 +46,15 @@ export const getTheme = (mode: PaletteMode): Theme =>
         fontWeight: 400,
       },
       body1: {
-        fontSize: "0.875rem",
+        fontSize: "1rem",
         fontWeight: 400,
-        lineHeight: "1.334rem",
+        lineHeight: "1.460rem",
       },
       body2: {
-        fontSize: "0.75rem",
+        fontSize: "0.875rem",
         letterSpacing: "0rem",
         fontWeight: 400,
-        lineHeight: "1rem",
+        lineHeight: "1.334rem",
       },
       subtitle1: {
         fontSize: "0.875rem",

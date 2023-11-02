@@ -74,9 +74,9 @@ export const getPaletteTokens = (mode: PaletteMode): PaletteOptions => ({
       }
     : {
         primary: {
-          main: "#4570EA",
+          main: "#5D87FF",
           light: "#ECF2FF",
-          dark: "#345dda",
+          dark: "#4570EA",
         },
         secondary: {
           main: "#23afdb",

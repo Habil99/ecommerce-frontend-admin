@@ -13,6 +13,12 @@ export const router = createBrowserRouter([
         <App />
       </Content>
     ),
+    // children: [
+    //   {
+    //     path: "/dashboard",
+    //     element: Dashboard,
+    //   },
+    // ],
   },
   authenticationRoute,
 ]);

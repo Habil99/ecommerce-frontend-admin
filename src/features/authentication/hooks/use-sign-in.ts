@@ -65,7 +65,6 @@ export const useSignIn = () => {
           dispatch(setUser(user));
           dispatch(setIsAuthenticated(true));
 
-          toast.success("You have successfully signed in");
           navigate("/");
         }),
     enableReinitialize: true,
