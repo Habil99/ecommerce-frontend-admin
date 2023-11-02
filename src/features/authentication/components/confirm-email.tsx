@@ -1,6 +1,6 @@
 import { Alert, Button, Stack, styled, TextField } from "@mui/material";
 import { KeyboardEvent, useCallback, useRef } from "react";
-import { useConfirmEmailMutation } from "@/features/authentication/services/authentication.service.ts";
+import { useConfirmEmailMutation } from "@/features/authentication/services/authentication.service";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { valueIsString } from "@/lib";
 

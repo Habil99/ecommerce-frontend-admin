@@ -1,2 +1,2 @@
-export * from "./user.type.ts";
-export * from "./response.type.ts";
+export * from "./user.type";
+export * from "./response.type";

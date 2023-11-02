@@ -1,5 +1,5 @@
 import { createTheme, PaletteMode, Theme } from "@mui/material";
-import { getPaletteTokens } from "@/features/theme/constants/color-tokens.ts";
+import { getPaletteTokens } from "@/features/theme/constants/color-tokens";
 
 export const getTheme = (mode: PaletteMode): Theme =>
   createTheme({
@@ -139,6 +139,26 @@ export const getTheme = (mode: PaletteMode): Theme =>
         styleOverrides: {
           standardError: ({ theme }) => ({
             backgroundColor: theme.palette.error.dark,
+          }),
+        },
+      },
+      MuiPaper: {
+        styleOverrides: {
+          root: {
+            backgroundImage: "none",
+          },
+        },
+      },
+      MuiMenu: {
+        styleOverrides: {
+          paper: ({ theme }) => ({
+            border: `1px solid ${theme.palette.border?.main}`,
+          }),
+          list: ({ theme }) => ({
+            "& .MuiButtonBase-root:hover": {
+              background: "transparent",
+              color: theme.palette.primary.main,
+            },
           }),
         },
       },

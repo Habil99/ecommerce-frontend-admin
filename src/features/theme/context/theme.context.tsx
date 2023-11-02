@@ -6,7 +6,7 @@ import {
   useMemo,
   useState,
 } from "react";
-import { ThemeContextType } from "@/features/theme/types/theme.type.ts";
+import { ThemeContextType } from "@/features/theme/types/theme.type";
 import { PaletteMode, ThemeProvider, useMediaQuery } from "@mui/material";
 import { getTheme } from "@/features/theme";
 

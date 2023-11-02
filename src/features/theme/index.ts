@@ -1,2 +1,2 @@
-export { getTheme } from "./theme.ts";
+export { getTheme } from "./theme";
 export { AppThemeProvider, AppThemeContext } from "./context/theme.context";

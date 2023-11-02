@@ -4,12 +4,12 @@ import {
   ConfirmEmailRequest,
   SignInRequest,
   SignUpRequest,
-} from "@/features/authentication/types/request.type.ts";
+} from "@/features/authentication/types/request.type";
 import {
   ConfirmEmailResponse,
   SignInResponse,
   SignUpResponse,
-} from "@/features/authentication/types/response.type.ts";
+} from "@/features/authentication/types/response.type";
 
 export const authenticationService = createApi({
   reducerPath: "authenticationService",

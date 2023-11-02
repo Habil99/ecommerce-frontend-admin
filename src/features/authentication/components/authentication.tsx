@@ -2,7 +2,6 @@ import { Navigate, Outlet } from "react-router-dom";
 import { alpha, Box, Paper, styled } from "@mui/material";
 import { StandardCSSProperties } from "@mui/system";
 import { getIsAuthenticated, useAppSelector } from "@/store";
-import { shallowEqual } from "react-redux";
 import { Logo } from "@/components";
 
 const StyledAuthenticationContainer = styled(Box)(
@@ -10,7 +9,6 @@ const StyledAuthenticationContainer = styled(Box)(
     width: "100%",
     minHeight: "100vh",
     backgroundColor: alpha(theme.palette.primary.main, 0.1),
-    backgroundImage: "none",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -20,7 +18,6 @@ const StyledAuthenticationContainer = styled(Box)(
 const StyledAuthenticationBox = styled(Paper)(
   ({ theme }): Partial<StandardCSSProperties> => ({
     backgroundColor: theme.palette.background.primary,
-    backgroundImage: "none",
     borderRadius: 7,
     padding: 32,
     maxWidth: 480,
@@ -29,7 +26,7 @@ const StyledAuthenticationBox = styled(Paper)(
 );
 
 const Authentication = () => {
-  const isAuthenticated = useAppSelector(getIsAuthenticated, shallowEqual);
+  const isAuthenticated = useAppSelector(getIsAuthenticated);
 
   if (isAuthenticated) {
     return <Navigate to="/" replace />;

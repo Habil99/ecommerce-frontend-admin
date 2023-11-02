@@ -1,8 +1,8 @@
-export * from "./store.ts";
-export { getUser, setUser } from "./slices/user.slice.ts";
+export * from "./store";
+export { getUser, setUser } from "./slices/user.slice";
 export {
   getTokens,
   getIsAuthenticated,
   setTokens,
   setIsAuthenticated,
-} from "./slices/auth.slice.ts";
+} from "./slices/auth.slice";

@@ -2,7 +2,7 @@ import "./App.css";
 import { Outlet } from "react-router-dom";
 import { Box, Container } from "@mui/material";
 import { Header, Sidebar } from "@/components";
-import { SIDEBAR_WIDTH } from "@/lib/constants.ts";
+import { SIDEBAR_WIDTH } from "@/lib/constants";
 import { useCallback, useState } from "react";
 
 function App() {

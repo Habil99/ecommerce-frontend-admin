@@ -1,7 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import userReducer from "@/store/slices/user.slice.ts";
-import authReducer from "@/store/slices/auth.slice.ts";
+import {
+  shallowEqual,
+  TypedUseSelectorHook,
+  useDispatch,
+  useSelector,
+} from "react-redux";
+import userReducer from "@/store/slices/user.slice";
+import authReducer from "@/store/slices/auth.slice";
 import { authenticationService } from "@/features/authentication";
 import { userService } from "@/services";
 
@@ -24,3 +29,7 @@ export type AppDispatch = typeof store.dispatch;
 
 export const useAppDispatch: () => AppDispatch = useDispatch;
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+
+export const useAppShallowEqualSelector = <TSelected>(
+  selector: (state: RootState) => TSelected
+) => useSelector(selector, shallowEqual);

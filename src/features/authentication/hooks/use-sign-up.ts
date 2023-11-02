@@ -1,8 +1,8 @@
 import { useEffect, useMemo } from "react";
 import { object, string } from "yup";
 import { useFormik } from "formik";
-import { useSignUpMutation } from "@/features/authentication/services/authentication.service.ts";
-import { SignUpRequest } from "@/features/authentication/types/request.type.ts";
+import { useSignUpMutation } from "@/features/authentication/services/authentication.service";
+import { SignUpRequest } from "@/features/authentication/types/request.type";
 import { valueIsString } from "@/lib";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";

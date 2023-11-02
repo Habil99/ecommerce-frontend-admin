@@ -1,6 +1,5 @@
 import { FC, PropsWithChildren, useEffect } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
-import { shallowEqual } from "react-redux";
 import {
   getIsAuthenticated,
   setIsAuthenticated,
@@ -16,7 +15,7 @@ export const Content: FC<PropsWithChildren> = ({ children }) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const isAuthenticated = useAppSelector(getIsAuthenticated, shallowEqual);
+  const isAuthenticated = useAppSelector(getIsAuthenticated);
 
   const [getCurrentUser, { isLoading, isError }] = useLazyGetCurrentUserQuery();
 

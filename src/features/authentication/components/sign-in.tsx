@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import { AppLink } from "@/components";
 import { valueIsString } from "@/lib";
-import { useSignIn } from "@/features/authentication/hooks/use-sign-in.ts";
+import { useSignIn } from "@/features/authentication/hooks/use-sign-in";
 
 const SignIn = () => {
   const {
