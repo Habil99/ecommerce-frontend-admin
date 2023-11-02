@@ -3,7 +3,7 @@ import { lazy } from "react";
 import { authenticationRoute } from "@/features/authentication";
 import { Content } from "@/components";
 
-const App = lazy(() => import("@/App.tsx"));
+const App = lazy(() => import("@/App"));
 
 export const router = createBrowserRouter([
   {

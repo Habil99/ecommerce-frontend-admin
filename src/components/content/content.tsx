@@ -1,3 +1,6 @@
+import { FC, PropsWithChildren, useEffect } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
+import { shallowEqual } from "react-redux";
 import {
   getIsAuthenticated,
   setIsAuthenticated,
@@ -6,11 +9,8 @@ import {
   useAppDispatch,
   useAppSelector,
 } from "@/store";
-import { FC, PropsWithChildren, useEffect } from "react";
 import { useLazyGetCurrentUserQuery } from "@/services";
 import { LoadingScreen } from "@/components";
-import { Navigate, useNavigate } from "react-router-dom";
-import { shallowEqual } from "react-redux";
 
 export const Content: FC<PropsWithChildren> = ({ children }) => {
   const dispatch = useAppDispatch();

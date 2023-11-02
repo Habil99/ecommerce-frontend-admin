@@ -6,7 +6,7 @@ import { RouterProvider } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "@/store";
 import { Toaster } from "react-hot-toast";
-import { router } from "@/router.tsx";
+import { router } from "@/router";
 import { Loadable } from "@/components";
 
 import "@fontsource/poppins/300.css";

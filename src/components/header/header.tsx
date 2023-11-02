@@ -8,10 +8,10 @@ import {
   Toolbar,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import { SIDEBAR_WIDTH } from "@/lib/constants.ts";
-import { stringAvatar } from "@/lib";
+import { SIDEBAR_WIDTH } from "@/lib/constants";
 import { getUser, useAppSelector } from "@/store";
 import { User } from "@/types";
+import { stringAvatar } from "@/lib";
 
 type HeaderProps = {
   toggleSidebar: (open?: boolean) => void;

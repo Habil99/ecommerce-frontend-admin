@@ -11,9 +11,9 @@ import {
   styled,
   Theme,
 } from "@mui/material";
-import { SIDEBAR_WIDTH } from "@/lib/constants.ts";
-import { Logo } from "@/components";
 import { Category, FormatSize, Palette } from "@mui/icons-material";
+import { SIDEBAR_WIDTH } from "@/lib/constants";
+import { Logo } from "@/components";
 
 type SidebarProps = {
   sidebarIsOpen: boolean;
