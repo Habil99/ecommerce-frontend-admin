@@ -1,116 +1,16 @@
 import {
   Box,
-  CSSObject,
-  Drawer,
   List,
   ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
   ListSubheader,
-  styled,
-  Theme,
 } from "@mui/material";
-import { Category, FormatSize, Palette } from "@mui/icons-material";
-import { SIDEBAR_WIDTH } from "@/lib/constants";
 import { Logo } from "@/components";
-
-type SidebarProps = {
-  sidebarIsOpen: boolean;
-  toggleSidebar: (open?: boolean) => void;
-};
-
-const sidebarData = [
-  {
-    title: "Colors",
-    icon: <Palette />,
-    link: "/colors",
-  },
-  {
-    title: "Sizes",
-    icon: <FormatSize />,
-    link: "/sizes",
-  },
-  {
-    title: "Categories",
-    icon: <Category />,
-    link: "/categories",
-  },
-];
-
-const openedMixin = (theme: Theme): CSSObject => ({
-  width: SIDEBAR_WIDTH.OPEN,
-  transition: theme.transitions.create("width", {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.enteringScreen,
-  }),
-  overflowX: "hidden",
-});
-
-const closedMixin = (theme: Theme): CSSObject => ({
-  transition: theme.transitions.create("width", {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  overflowX: "hidden",
-  width: SIDEBAR_WIDTH.CLOSED,
-  [theme.breakpoints.up("sm")]: {
-    width: SIDEBAR_WIDTH.CLOSED,
-  },
-});
-
-const StyledDrawer = styled(Drawer, {
-  shouldForwardProp: (prop) => prop !== "open",
-})(({ theme, open }) => ({
-  width: SIDEBAR_WIDTH.OPEN,
-  flexShrink: 0,
-  whiteSpace: "nowrap",
-  boxSizing: "border-box",
-
-  ...(open ? openedMixin(theme) : closedMixin(theme)),
-
-  "& .MuiDrawer-paper": {
-    boxSizing: "border-box",
-    borderRightWidth: 1,
-    borderRightStyle: "solid",
-    borderRightColor: theme.palette.border?.main,
-
-    ...(open ? openedMixin(theme) : closedMixin(theme)),
-  },
-
-  "& .MuiListItemButton-root": {
-    borderRadius: 7,
-    margin: open ? "0 12px" : 0,
-
-    "&:hover": {
-      backgroundColor: theme.palette.primary.main,
-    },
-  },
-
-  "& .MuiListItemText-root": {
-    ...(!open && {
-      transition: theme.transitions.create("opacity", {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-      }),
-      opacity: 0,
-    }),
-  },
-
-  "& .MuiList-root": {
-    margin: open ? "0 12px" : 0,
-  },
-
-  ...(!open && {
-    "& .MuiListItemIcon-root": {
-      marginLeft: 8,
-    },
-  }),
-
-  "& .MuiListItemIcon-root svg": {
-    fontSize: 24,
-  },
-}));
+import { StyledDrawer } from "@/components/sidebar/sidebar.styled";
+import { SidebarProps } from "@/components/sidebar/sidebar.type";
+import { sidebarData } from "@/components/sidebar/constants";
 
 export const Sidebar = ({ sidebarIsOpen, toggleSidebar }: SidebarProps) => {
   return (
