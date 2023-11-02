@@ -1,90 +1,160 @@
 import {
   Box,
+  CSSObject,
   Drawer,
   List,
+  ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
   ListSubheader,
   styled,
+  Theme,
 } from "@mui/material";
-import { useCallback, useState } from "react";
 import { SIDEBAR_WIDTH } from "@/lib/constants.ts";
 import { Logo } from "@/components";
 import { Category, FormatSize, Palette } from "@mui/icons-material";
 
-const StyledDrawer = styled(Drawer)(({ theme }) => ({
-  bgColor: theme.palette.primary.main,
+type SidebarProps = {
+  sidebarIsOpen: boolean;
+  toggleSidebar: (open?: boolean) => void;
+};
+
+const sidebarData = [
+  {
+    title: "Colors",
+    icon: <Palette />,
+    link: "/colors",
+  },
+  {
+    title: "Sizes",
+    icon: <FormatSize />,
+    link: "/sizes",
+  },
+  {
+    title: "Categories",
+    icon: <Category />,
+    link: "/categories",
+  },
+];
+
+const openedMixin = (theme: Theme): CSSObject => ({
+  width: SIDEBAR_WIDTH.OPEN,
+  transition: theme.transitions.create("width", {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.enteringScreen,
+  }),
+  overflowX: "hidden",
+});
+
+const closedMixin = (theme: Theme): CSSObject => ({
+  transition: theme.transitions.create("width", {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  overflowX: "hidden",
+  width: SIDEBAR_WIDTH.CLOSED,
+  [theme.breakpoints.up("sm")]: {
+    width: SIDEBAR_WIDTH.CLOSED,
+  },
+});
+
+const StyledDrawer = styled(Drawer, {
+  shouldForwardProp: (prop) => prop !== "open",
+})(({ theme, open }) => ({
+  width: SIDEBAR_WIDTH.OPEN,
+  flexShrink: 0,
+  whiteSpace: "nowrap",
+  boxSizing: "border-box",
+
+  ...(open ? openedMixin(theme) : closedMixin(theme)),
 
   "& .MuiDrawer-paper": {
     boxSizing: "border-box",
-    width: SIDEBAR_WIDTH,
     borderRightWidth: 1,
     borderRightStyle: "solid",
     borderRightColor: theme.palette.border?.main,
+
+    ...(open ? openedMixin(theme) : closedMixin(theme)),
   },
 
   "& .MuiListItemButton-root": {
     borderRadius: 7,
-    margin: "0 12px",
+    margin: open ? "0 12px" : 0,
 
     "&:hover": {
       backgroundColor: theme.palette.primary.main,
     },
   },
 
-  "& .MuiList-root": {
-    margin: "0 12px",
+  "& .MuiListItemText-root": {
+    ...(!open && {
+      transition: theme.transitions.create("opacity", {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+      }),
+      opacity: 0,
+    }),
   },
+
+  "& .MuiList-root": {
+    margin: open ? "0 12px" : 0,
+  },
+
+  ...(!open && {
+    "& .MuiListItemIcon-root": {
+      marginLeft: 8,
+    },
+  }),
 
   "& .MuiListItemIcon-root svg": {
     fontSize: 24,
   },
 }));
 
-export const Sidebar = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(true);
-
-  const toggleDrawer = useCallback((open?: boolean) => {
-    if (open !== undefined) {
-      setIsOpen(open);
-    } else {
-      setIsOpen((prevState) => !prevState);
-    }
-  }, []);
-
+export const Sidebar = ({ sidebarIsOpen, toggleSidebar }: SidebarProps) => {
   return (
     <StyledDrawer
-      open={isOpen}
+      open={sidebarIsOpen}
       variant="permanent"
-      onClose={() => toggleDrawer(false)}
+      onClose={() => toggleSidebar(false)}
     >
-      <Box mx={3} height={70} display="flex" alignItems="center">
+      <Box
+        mr={3}
+        height={70}
+        display="flex"
+        alignItems="center"
+        ml={sidebarIsOpen ? 3 : "18px"}
+        overflow="hidden"
+      >
         <Logo width={180} />
       </Box>
       <List
         component="nav"
-        aria-labelled-by="nest-nav-subheader"
-        subheader={<ListSubheader>Settings</ListSubheader>}
+        subheader={
+          <ListSubheader
+            sx={{
+              visibility: sidebarIsOpen ? "visible" : "hidden",
+            }}
+          >
+            Settings
+          </ListSubheader>
+        }
       >
-        <ListItemButton>
-          <ListItemIcon>
-            <Palette />
-          </ListItemIcon>
-          <ListItemText primary="Colors" />
-        </ListItemButton>
-        <ListItemButton>
-          <ListItemIcon>
-            <FormatSize />
-          </ListItemIcon>
-          <ListItemText primary="Sizes" />
-        </ListItemButton>
-        <ListItemButton>
-          <ListItemIcon>
-            <Category />
-          </ListItemIcon>
-          <ListItemText primary="Categories" />
-        </ListItemButton>
+        {sidebarData.map((item) => (
+          <ListItem disablePadding key={item.title}>
+            <ListItemButton
+              sx={{
+                ...(!sidebarIsOpen && {
+                  background: "transparent !important",
+                }),
+              }}
+            >
+              <ListItemIcon>{item.icon}</ListItemIcon>
+              <ListItemText primary={item.title} />
+            </ListItemButton>
+          </ListItem>
+        ))}
       </List>
     </StyledDrawer>
   );

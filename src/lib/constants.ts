@@ -1,1 +1,4 @@
-export const SIDEBAR_WIDTH: number = 280;
+export const SIDEBAR_WIDTH = {
+  OPEN: 280,
+  CLOSED: 78,
+};

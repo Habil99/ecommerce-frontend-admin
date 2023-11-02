@@ -136,6 +136,7 @@ export const getPaletteTokens = (mode: PaletteMode): PaletteOptions => ({
         },
         divider: "#2A3547",
         background: {
+          primary: "#2A3447",
           default: "#2A3447",
           paper: "#2A3447",
         },
