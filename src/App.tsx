@@ -22,10 +22,11 @@ function App() {
       <Box
         sx={{
           marginLeft: `${SIDEBAR_WIDTH}px`,
+          flexGrow: 1,
         }}
       >
         <Header sidebarIsOpen={sidebarIsOpen} toggleSidebar={toggleSidebar} />
-        <Container>
+        <Container maxWidth="lg" sx={{ marginTop: "80px" }}>
           <Outlet />
         </Container>
       </Box>

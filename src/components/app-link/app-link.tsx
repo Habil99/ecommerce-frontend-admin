@@ -1,8 +1,8 @@
-import { Link as MuiLink } from "@mui/material";
+import { Link as MuiLink, LinkProps as MuiLinkProps } from "@mui/material";
 import { Link } from "react-router-dom";
-import React, { FC, PropsWithChildren } from "react";
+import { FC, PropsWithChildren } from "react";
 
-type AppLinkProps = React.ComponentProps<typeof MuiLink> & {
+type AppLinkProps = MuiLinkProps & {
   to: string;
 };
 

@@ -5,16 +5,16 @@ export const sidebarData: SidebarData[] = [
   {
     title: "Colors",
     icon: <Palette />,
-    link: "/colors",
+    link: "/settings/colors",
   },
   {
     title: "Sizes",
     icon: <FormatSize />,
-    link: "/sizes",
+    link: "/settings/sizes",
   },
   {
     title: "Categories",
     icon: <Category />,
-    link: "/categories",
+    link: "/settings/categories",
   },
 ];

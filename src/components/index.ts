@@ -5,3 +5,5 @@ export { Content } from "./content/content";
 export { Sidebar } from "./sidebar/sidebar";
 export { Header } from "./header/header";
 export { Logo } from "./logo/logo";
+export { PageHeader } from "./page-header/page-header";
+export { withLoadable } from "./hoc/with-loadable";

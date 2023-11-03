@@ -1,11 +1,17 @@
 import { lazy } from "react";
+import { RouteObject } from "react-router-dom";
+import { withLoadable } from "@/components";
 
-const Authentication = lazy(() => import("./components/authentication"));
-const SignIn = lazy(() => import("./components/sign-in"));
-const SignUp = lazy(() => import("./components/sign-up"));
-const ConfirmEmail = lazy(() => import("./components/confirm-email"));
+const Authentication = withLoadable(
+  lazy(() => import("./components/authentication"))
+);
+const SignIn = withLoadable(lazy(() => import("./components/sign-in")));
+const SignUp = withLoadable(lazy(() => import("./components/sign-up")));
+const ConfirmEmail = withLoadable(
+  lazy(() => import("./components/confirm-email"))
+);
 
-export const authenticationRoute = {
+export const authenticationRoute: RouteObject = {
   path: "auth",
   element: <Authentication />,
   children: [

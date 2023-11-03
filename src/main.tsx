@@ -17,14 +17,14 @@ import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <Provider store={store}>
-      <AppThemeProvider>
-        <CssBaseline />
-        <Loadable>
+    <Loadable>
+      <Provider store={store}>
+        <AppThemeProvider>
+          <CssBaseline />
           <RouterProvider router={router} />
-        </Loadable>
-        <Toaster />
-      </AppThemeProvider>
-    </Provider>
+          <Toaster />
+        </AppThemeProvider>
+      </Provider>
+    </Loadable>
   </React.StrictMode>
 );
