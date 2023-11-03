@@ -43,4 +43,8 @@ const fadeOutMixin = (theme: Theme) => ({
   visibility: "hidden",
 });
 
-export { stringAvatar, stringToColor, fadeInMixin, fadeOutMixin };
+const fadeMixin = (condition: boolean, theme: Theme) => ({
+  ...(condition ? fadeInMixin(theme) : fadeOutMixin(theme)),
+});
+
+export { stringAvatar, stringToColor, fadeInMixin, fadeOutMixin, fadeMixin };

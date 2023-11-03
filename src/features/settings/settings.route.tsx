@@ -3,9 +3,11 @@ import { lazy } from "react";
 import { withLoadable } from "@/components";
 
 const Settings = withLoadable(lazy(() => import("./components/settings")));
-const Colors = withLoadable(lazy(() => import("./components/colors")));
-const Sizes = withLoadable(lazy(() => import("./components/sizes")));
-const Categories = withLoadable(lazy(() => import("./components/categories")));
+const Colors = withLoadable(lazy(() => import("./components/color/color")));
+const Sizes = withLoadable(lazy(() => import("./components/size/size")));
+const Categories = withLoadable(
+  lazy(() => import("./components/category/category"))
+);
 
 export const settingsRoute: RouteObject = {
   path: "/settings",
