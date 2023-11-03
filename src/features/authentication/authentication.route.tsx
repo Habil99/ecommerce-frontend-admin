@@ -1,6 +1,6 @@
 import { lazy } from "react";
 import { RouteObject } from "react-router-dom";
-import { withLoadable } from "@/components";
+import { withLoadable } from "@/components/hoc/with-loadable";
 
 const Authentication = withLoadable(
   lazy(() => import("./components/authentication"))

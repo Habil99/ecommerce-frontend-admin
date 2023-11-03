@@ -44,10 +44,6 @@ export const StyledDrawer = styled(Drawer, {
   "& .MuiListItemButton-root": {
     borderRadius: 7,
     margin: open ? "0 12px" : 0,
-
-    "&:hover": {
-      backgroundColor: theme.palette.primary.main,
-    },
   },
 
   "& .MuiListItemText-root": {

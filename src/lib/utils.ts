@@ -1,3 +1,5 @@
+import { Theme } from "@mui/material";
+
 function stringToColor(string: string) {
   let hash = 0;
   let i;
@@ -25,4 +27,20 @@ function stringAvatar(name: string) {
   };
 }
 
-export { stringAvatar, stringToColor };
+const fadeInMixin = (theme: Theme) => ({
+  transition: theme.transitions.create(["opacity", "visibility"], {
+    duration: theme.transitions.duration.complex,
+  }),
+  opacity: 1,
+  visibility: "visible",
+});
+
+const fadeOutMixin = (theme: Theme) => ({
+  transition: theme.transitions.create(["opacity", "visibility"], {
+    duration: theme.transitions.duration.complex,
+  }),
+  opacity: 0,
+  visibility: "hidden",
+});
+
+export { stringAvatar, stringToColor, fadeInMixin, fadeOutMixin };

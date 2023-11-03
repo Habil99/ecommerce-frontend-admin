@@ -17,7 +17,7 @@ function App() {
   }, []);
 
   return (
-    <Box display="flex" gap={3} minHeight="100vh">
+    <Box display="flex" minHeight="100vh">
       <Sidebar sidebarIsOpen={sidebarIsOpen} toggleSidebar={toggleSidebar} />
       <Box
         sx={{

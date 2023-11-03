@@ -11,5 +11,6 @@ export const StyledPageHeaderGrid = styled(Grid)(
     position: "relative",
     backgroundColor: theme.palette.secondary.main,
     overflow: "hidden",
+    marginBottom: theme.spacing(6),
   })
 );

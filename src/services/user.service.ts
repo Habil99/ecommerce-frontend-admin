@@ -9,7 +9,6 @@ export const userService = createApi({
     getCurrentUser: builder.query<User, void>({
       query: () => ({
         url: "/users/me",
-        method: "GET",
       }),
     }),
   }),

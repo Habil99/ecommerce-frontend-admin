@@ -132,7 +132,7 @@ export const getPaletteTokens = (mode: PaletteMode): PaletteOptions => ({
         action: {
           disabledBackground: "rgba(73,82,88,0.12)",
           hoverOpacity: 0.02,
-          hover: "#0f4b5b",
+          hover: "#253662",
         },
         divider: "#2A3547",
         background: {

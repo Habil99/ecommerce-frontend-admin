@@ -33,8 +33,12 @@ export const AppBreadcrumb = () => {
   return (
     <StyledBreadcrumbs separator={<BreadCrumbSeparator />}>
       {[
-        <StyledBreadcrumbLink to="/">Home</StyledBreadcrumbLink>,
-        <StyledBreadcrumbLink to="/">Categories</StyledBreadcrumbLink>,
+        <StyledBreadcrumbLink key="1" to="/">
+          Home
+        </StyledBreadcrumbLink>,
+        <StyledBreadcrumbLink key="2" to="/">
+          Categories
+        </StyledBreadcrumbLink>,
       ]}
     </StyledBreadcrumbs>
   );
