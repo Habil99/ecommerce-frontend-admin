@@ -1,4 +1,5 @@
 import {
+  Alert,
   Button,
   Dialog,
   DialogActions,
@@ -13,10 +14,10 @@ import {
   Stack,
   TextField,
 } from "@mui/material";
-import { Close } from "@mui/icons-material";
+import { Close, DoneAll } from "@mui/icons-material";
 import { Category } from "../../types/category.type";
-import { Dispatch, SetStateAction, useEffect } from "react";
-import { uuid } from "@/lib";
+import { Dispatch, SetStateAction, useEffect, useMemo } from "react";
+import { uuid, valueIsString } from "@/lib";
 import {
   useCreateCategoryMutation,
   useUpdateCategoryMutation,
@@ -24,6 +25,7 @@ import {
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Nullable } from "@/types";
+import { LoadingButton } from "@/components";
 
 type CategoryFormProps = {
   isOpen: boolean;
@@ -32,21 +34,48 @@ type CategoryFormProps = {
   initialValues: Nullable<Category>;
 };
 
+const validationSchema = Yup.object({
+  parentId: Yup.number().nullable(),
+  name: Yup.string().min(3).trim(),
+});
+
 export const CategoryForm = ({
   isOpen,
   setIsOpen,
   categories,
   initialValues,
 }: CategoryFormProps) => {
-  const [createCategory, { isLoading: isCreateLoading }] =
-    useCreateCategoryMutation();
-  const [updateCategory, { isLoading: isUpdateLoading }] =
-    useUpdateCategoryMutation();
+  const [
+    createCategory,
+    {
+      isLoading: isCreateLoading,
+      isError: isCreateError,
+      error: createError,
+      reset: resetCreate,
+    },
+  ] = useCreateCategoryMutation();
+  const [
+    updateCategory,
+    {
+      isLoading: isUpdateLoading,
+      isError: isUpdateError,
+      error: updateError,
+      reset: resetUpdate,
+    },
+  ] = useUpdateCategoryMutation();
 
-  const validationSchema = Yup.object({
-    parentId: Yup.number().nullable(),
-    name: Yup.string().min(3).trim(),
-  });
+  const isLoading = useMemo(
+    () => isCreateLoading || isUpdateLoading,
+    [isCreateLoading, isUpdateLoading]
+  );
+  const isError = useMemo(
+    () => isCreateError || isUpdateError,
+    [isCreateError, isUpdateError]
+  );
+  const error = useMemo(
+    () => (isCreateError ? createError : isUpdateError ? updateError : null),
+    [createError, isCreateError, isUpdateError, updateError]
+  );
 
   const formik = useFormik<Pick<Category, "name" | "parentId">>({
     initialValues: {
@@ -68,18 +97,10 @@ export const CategoryForm = ({
         .unwrap()
         .then(() => setIsOpen(false))
         .catch((error) => {
-          console.log(error);
-          if (typeof error?.message !== "string") {
-            formikHelpers.setErrors({
-              name: error.message?.name?.[0],
-              parentId: error.message?.parentId?.[0],
-            });
-          } else {
-            console.log(error);
-            formikHelpers.setErrors({
-              parentId: error.message,
-            });
-          }
+          formikHelpers.setErrors({
+            name: error.message?.name?.[0],
+            parentId: error.message?.parentId?.[0],
+          });
         });
     },
     enableReinitialize: true,
@@ -87,6 +108,8 @@ export const CategoryForm = ({
 
   useEffect(() => {
     formik.resetForm();
+    resetCreate();
+    resetUpdate();
   }, [isOpen]);
 
   useEffect(() => {
@@ -155,22 +178,25 @@ export const CategoryForm = ({
             error={formik.touched.name && Boolean(formik.errors.name)}
             helperText={formik.touched.name && formik.errors.name}
           />
+          {error?.message && valueIsString(error.message) && (
+            <Alert severity="error" sx={{ display: isError ? "flex" : "none" }}>
+              {error?.message}
+            </Alert>
+          )}
         </Stack>
       </DialogContent>
       <DialogActions sx={{ pr: 3, pb: 3 }}>
-        <Button
-          onClick={() => setIsOpen(false)}
-          disabled={isCreateLoading || isUpdateLoading}
-        >
+        <Button onClick={() => setIsOpen(false)} disabled={isLoading}>
           Cancel
         </Button>
-        <Button
+        <LoadingButton
           variant="contained"
           onClick={() => formik.handleSubmit()}
-          disabled={isCreateLoading || isUpdateLoading}
+          isLoading={isLoading}
+          endIcon={<DoneAll />}
         >
           Save
-        </Button>
+        </LoadingButton>
       </DialogActions>
     </Dialog>
   );

@@ -4,14 +4,12 @@ import {
   GridRenderCellParams,
   GridRowSelectionModel,
 } from "@mui/x-data-grid";
-import { ButtonGroup, IconButton } from "@mui/material";
-import { Delete, EditNote } from "@mui/icons-material";
 import { useMemo } from "react";
 import { StyledDataGrid } from "@/features/settings/components/category/category.styled";
+import { CrudActions } from "@/types/common.type";
+import { ActionMenu } from "@/components";
 
-type CategoryGridProps = {
-  editAction: (id: number) => void;
-  deleteAction: (id: number) => void;
+type CategoryGridProps = CrudActions & {
   rows: Category[];
   isLoading: boolean;
   rowSelectionModel: GridRowSelectionModel;
@@ -56,21 +54,13 @@ export const CategoryGrid = ({
         headerName: "",
         align: "right",
         flex: 1,
-        renderCell: (params: GridRenderCellParams) => {
-          return (
-            <ButtonGroup>
-              <IconButton
-                color="error"
-                onClick={() => deleteAction(+params.id)}
-              >
-                <Delete />
-              </IconButton>
-              <IconButton color="info" onClick={() => editAction(+params.id)}>
-                <EditNote />
-              </IconButton>
-            </ButtonGroup>
-          );
-        },
+        renderCell: (params: GridRenderCellParams) => (
+          <ActionMenu
+            editAction={editAction}
+            deleteAction={deleteAction}
+            id={+params.id}
+          />
+        ),
       },
     ],
     [editAction, deleteAction]
