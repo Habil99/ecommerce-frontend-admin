@@ -56,30 +56,31 @@ export const CategoryForm = ({
     validationSchema,
     validateOnBlur: true,
     onSubmit: (values, formikHelpers) => {
-      if (initialValues) {
-        return updateCategory({
-          id: initialValues.id,
-          name: values.name,
-          parentId: values.parentId,
-        })
-          .then(() => setIsOpen(false))
-          .catch((error) => {
+      return (
+        initialValues
+          ? updateCategory({
+              id: initialValues.id,
+              name: values.name,
+              parentId: values.parentId,
+            })
+          : createCategory(values)
+      )
+        .unwrap()
+        .then(() => setIsOpen(false))
+        .catch((error) => {
+          console.log(error);
+          if (typeof error?.message !== "string") {
             formikHelpers.setErrors({
               name: error.message?.name?.[0],
               parentId: error.message?.parentId?.[0],
             });
-          });
-      } else {
-        return createCategory(values)
-          .unwrap()
-          .then(() => setIsOpen(false))
-          .catch((error) => {
+          } else {
+            console.log(error);
             formikHelpers.setErrors({
-              name: error.message?.name?.[0],
-              parentId: error.message?.parentId?.[0],
+              parentId: error.message,
             });
-          });
-      }
+          }
+        });
     },
     enableReinitialize: true,
   });
@@ -122,6 +123,9 @@ export const CategoryForm = ({
               error={formik.touched.parentId && Boolean(formik.errors.parentId)}
               value={String(formik.values.parentId)}
             >
+              <MenuItem value={undefined} key={uuid()}>
+                None
+              </MenuItem>
               {categories.length === 0 && (
                 <MenuItem value="" key={uuid()}>
                   No data
@@ -133,8 +137,12 @@ export const CategoryForm = ({
                 </MenuItem>
               ))}
             </Select>
-            <FormHelperText>
-              If you choose parent, created record will be subcategory
+            <FormHelperText
+              error={!!(formik.touched.parentId && formik.errors.parentId)}
+            >
+              {formik.touched.parentId && formik.errors.parentId
+                ? formik.errors.parentId
+                : "If you choose parent, created record will be subcategory"}
             </FormHelperText>
           </FormControl>
           <TextField
