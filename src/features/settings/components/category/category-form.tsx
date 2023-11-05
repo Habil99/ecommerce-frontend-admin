@@ -14,7 +14,7 @@ import {
   Stack,
   TextField,
 } from "@mui/material";
-import { Close, DoneAll } from "@mui/icons-material";
+import { Clear, Close, DoneAll } from "@mui/icons-material";
 import { Category } from "../../types/category.type";
 import { Dispatch, SetStateAction, useEffect, useMemo } from "react";
 import { uuid, valueIsString } from "@/lib";
@@ -186,7 +186,12 @@ export const CategoryForm = ({
         </Stack>
       </DialogContent>
       <DialogActions sx={{ pr: 3, pb: 3 }}>
-        <Button onClick={() => setIsOpen(false)} disabled={isLoading}>
+        <Button
+          onClick={() => setIsOpen(false)}
+          disabled={isLoading}
+          variant="outlined"
+          endIcon={<Clear />}
+        >
           Cancel
         </Button>
         <LoadingButton
