@@ -41,6 +41,17 @@ export const CategoryGrid = ({
         minWidth: 200,
       },
       {
+        field: "parentId",
+        headerName: "Parent",
+        minWidth: 200,
+        valueGetter: (params: GridRenderCellParams) => {
+          const category = rows.find(
+            (category) => category.id === +params.value
+          );
+          return category?.name;
+        },
+      },
+      {
         field: "slug",
         headerName: "",
         align: "right",

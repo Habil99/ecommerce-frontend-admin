@@ -2,6 +2,7 @@ import { FC, PropsWithChildren, useEffect } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import {
   getIsAuthenticated,
+  getUser,
   setIsAuthenticated,
   setTokens,
   setUser,
@@ -15,6 +16,7 @@ export const Content: FC<PropsWithChildren> = ({ children }) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
+  const user = useAppSelector(getUser);
   const isAuthenticated = useAppSelector(getIsAuthenticated);
 
   const [getCurrentUser, { isLoading, isError }] = useLazyGetCurrentUserQuery();
@@ -51,8 +53,9 @@ export const Content: FC<PropsWithChildren> = ({ children }) => {
     return <Navigate to="/auth/sign-in" />;
   }
 
-  if (isAuthenticated) {
+  if (isAuthenticated && user) {
     return children;
   }
-  return null;
+
+  return <LoadingScreen />;
 };

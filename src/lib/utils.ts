@@ -47,4 +47,44 @@ const fadeMixin = (condition: boolean, theme: Theme) => ({
   ...(condition ? fadeInMixin(theme) : fadeOutMixin(theme)),
 });
 
-export { stringAvatar, stringToColor, fadeInMixin, fadeOutMixin, fadeMixin };
+const uuid = ({
+  length = 8,
+  prefix = "",
+  suffix = "",
+  type = "alphanumeric",
+}: {
+  length?: number;
+  prefix?: string;
+  suffix?: string;
+  type?: "alphanumeric" | "numeric" | "alphabetic";
+} = {}) => {
+  // do not use math.random() for security reasons
+  const numericUnicodeRange = [48, 57];
+  const alphaUnicodeRange = [65, 90];
+  const alphaNumericUnicodeRange = [
+    ...numericUnicodeRange,
+    ...alphaUnicodeRange,
+  ];
+  const ranges = {
+    alphanumeric: alphaNumericUnicodeRange,
+    numeric: numericUnicodeRange,
+    alphabetic: alphaUnicodeRange,
+  };
+  const chars = [];
+  const max = ranges[type][1] - ranges[type][0];
+  for (let i = 0; i < length; i++) {
+    chars.push(
+      String.fromCharCode(ranges[type][0] + Math.floor(Math.random() * max))
+    );
+  }
+  return `${prefix}${chars.join("")}${suffix}`;
+};
+
+export {
+  stringAvatar,
+  stringToColor,
+  fadeInMixin,
+  fadeOutMixin,
+  fadeMixin,
+  uuid,
+};

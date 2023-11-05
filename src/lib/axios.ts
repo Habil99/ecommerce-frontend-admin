@@ -1,6 +1,7 @@
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 import { BaseQueryFn } from "@reduxjs/toolkit/query";
 import { ApiErrorResponse } from "@/types";
+import { HttpRequest } from "@/lib/constants";
 
 const baseURL = process.env.VITE_API_URL;
 
@@ -40,7 +41,7 @@ export const axiosBaseQuery =
     try {
       const result = await axiosClient({
         url: baseURL + url,
-        method: method || "GET",
+        method: method || HttpRequest.GET,
         data,
         params,
         headers,

@@ -10,6 +10,7 @@ import {
   SignInResponse,
   SignUpResponse,
 } from "@/features/authentication/types/response.type";
+import { HttpRequest } from "@/lib/constants";
 
 export const authenticationService = createApi({
   reducerPath: "authenticationService",
@@ -18,21 +19,21 @@ export const authenticationService = createApi({
     signUp: builder.mutation<SignUpResponse, SignUpRequest>({
       query: ({ email, password, firstName, lastName }) => ({
         url: "/auth/sign-up",
-        method: "POST",
+        method: HttpRequest.POST,
         data: { email, password, firstName, lastName },
       }),
     }),
     signIn: builder.mutation<SignInResponse, SignInRequest>({
       query: ({ email, password }) => ({
         url: "/auth/sign-in",
-        method: "POST",
+        method: HttpRequest.POST,
         data: { email, password },
       }),
     }),
     confirmEmail: builder.mutation<ConfirmEmailResponse, ConfirmEmailRequest>({
       query: ({ otpCode, emailToken }) => ({
         url: "/auth/confirm-email",
-        method: "POST",
+        method: HttpRequest.POST,
         data: { otpCode, emailToken },
       }),
     }),
