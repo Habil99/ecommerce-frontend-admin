@@ -7,6 +7,9 @@ const Authentication = withLoadable(
 );
 const SignIn = withLoadable(lazy(() => import("./components/sign-in")));
 const SignUp = withLoadable(lazy(() => import("./components/sign-up")));
+const SignUpSuccess = withLoadable(
+  lazy(() => import("./components/sign-up-success"))
+);
 const ConfirmEmail = withLoadable(
   lazy(() => import("./components/confirm-email"))
 );
@@ -22,6 +25,10 @@ export const authenticationRoute: RouteObject = {
     {
       path: "sign-up",
       element: <SignUp />,
+    },
+    {
+      path: "sign-up-success",
+      element: <SignUpSuccess />,
     },
     {
       path: "confirm-email",

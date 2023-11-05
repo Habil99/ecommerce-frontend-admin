@@ -5,7 +5,6 @@ import { useSignUpMutation } from "@/features/authentication/services/authentica
 import { SignUpRequest } from "@/features/authentication/types/request.type";
 import { valueIsString } from "@/lib";
 import { useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
 
 export const useSignUp = () => {
   const navigate = useNavigate();
@@ -34,11 +33,8 @@ export const useSignUp = () => {
     onSubmit: (values: SignUpRequest) =>
       signUp(values)
         .unwrap()
-        .then((user) => {
-          toast.success("You have successfully signed up");
-          navigate("/auth/confirm-email", {
-            state: { email: user.email },
-          });
+        .then(() => {
+          navigate("/auth/sign-up-success");
         }),
     enableReinitialize: true,
   });
