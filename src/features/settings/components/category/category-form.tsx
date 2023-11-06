@@ -183,6 +183,8 @@ export const CategoryForm = ({
               {error?.message}
             </Alert>
           )}
+          {/* This is hack to submit form with enter when there is only input field in form */}
+          <input type="submit" hidden onSubmit={() => formik.handleSubmit()} />
         </Stack>
       </DialogContent>
       <DialogActions sx={{ pr: 3, pb: 3 }}>
