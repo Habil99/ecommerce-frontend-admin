@@ -4,13 +4,16 @@ import {
   StyledPageHeaderGrid,
   StyledPageHeaderImage,
 } from "@/components/page-header/page-header.styled";
-import { AppBreadcrumb } from "@/components/app-breadcrumb/app-breadcrumb";
+import { FC, PropsWithChildren } from "react";
 
 type PageHeaderProps = {
   title: string;
 };
 
-export const PageHeader = ({ title }: PageHeaderProps) => {
+export const PageHeader: FC<PropsWithChildren<PageHeaderProps>> = ({
+  title,
+  children,
+}) => {
   return (
     <StyledPageHeaderGrid
       container
@@ -23,7 +26,7 @@ export const PageHeader = ({ title }: PageHeaderProps) => {
       <Grid item xs={8}>
         <Stack gap={1}>
           <Typography variant="h3">{title}</Typography>
-          <AppBreadcrumb />
+          {children}
         </Stack>
       </Grid>
       <Grid item xs={4} justifyContent="flex-end">

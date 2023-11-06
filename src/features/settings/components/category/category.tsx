@@ -18,9 +18,11 @@ import { CategoryGrid } from "@/features/settings/components/category/category.g
 import { Category as CategoryType } from "@/features/settings/types/category.type";
 import { CategoryForm } from "@/features/settings/components/category/category-form";
 import { Nullable } from "@/types";
+import { useSettingOutlet } from "@/features/settings/hooks/use-settings-outlet";
 
 const Category = () => {
   const theme = useTheme();
+  const { setBreadcrumbLinks } = useSettingOutlet();
 
   const { data, isLoading: isFetchLoading } = useFindAllCategoriesQuery();
   const [deleteCategory, { isLoading: isDeleteLoading }] =
@@ -63,6 +65,15 @@ const Category = () => {
       setCategoryInitialValues(null);
     }
   }, [dialogIsOpen]);
+
+  useEffect(() => {
+    setBreadcrumbLinks([
+      {
+        title: "Categories",
+        path: "/settings/categories",
+      },
+    ]);
+  }, []);
 
   return (
     <Fragment>
