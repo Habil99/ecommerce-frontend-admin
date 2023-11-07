@@ -93,7 +93,7 @@ const Category = () => {
           </Button>
         </Stack>
         <CategoryGrid
-          rows={data || []}
+          rows={data}
           rowSelectionModel={rowSelectionModel}
           isLoading={isFetchLoading || isDeleteLoading}
           onRowSelectionModelChange={(newRowSelectionModel) =>

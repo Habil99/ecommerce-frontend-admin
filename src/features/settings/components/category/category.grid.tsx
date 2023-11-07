@@ -9,7 +9,7 @@ import { CrudActions } from "@/types/common.type";
 import { ActionMenu, AppDataGrid } from "@/components";
 
 type CategoryGridProps = CrudActions & {
-  rows: Category[];
+  rows: Category[] | undefined;
   isLoading: boolean;
   rowSelectionModel: GridRowSelectionModel;
   onRowSelectionModelChange: (
@@ -42,7 +42,7 @@ export const CategoryGrid = ({
         headerName: "Parent",
         minWidth: 200,
         valueGetter: (params: GridRenderCellParams) => {
-          const category = rows.find(
+          const category = rows?.find(
             (category) => category.id === +params.value
           );
           return category?.name;

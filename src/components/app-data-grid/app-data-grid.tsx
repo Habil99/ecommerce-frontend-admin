@@ -1,9 +1,8 @@
-import { Category } from "@/features/settings/types/category.type";
 import { GridColDef, GridRowSelectionModel } from "@mui/x-data-grid";
 import { StyledAppDataGrid } from "@/components/app-data-grid/app-data-grid.styled";
 
-type AppGridProps = {
-  rows: Category[];
+type AppGridProps<RowType> = {
+  rows: RowType[] | undefined;
   columns: GridColDef[];
   isLoading: boolean;
   rowSelectionModel: GridRowSelectionModel;
@@ -12,13 +11,15 @@ type AppGridProps = {
   ) => void;
 };
 
-export const AppDataGrid = ({
+export const AppDataGrid = <
+  RowType extends Record<string, RowType[keyof RowType]>,
+>({
   rows,
   rowSelectionModel,
   isLoading,
   onRowSelectionModelChange,
   columns,
-}: AppGridProps) => {
+}: AppGridProps<RowType>) => {
   return (
     <StyledAppDataGrid
       columns={columns}

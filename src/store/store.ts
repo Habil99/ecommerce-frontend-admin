@@ -9,7 +9,7 @@ import userReducer from "@/store/slices/user.slice";
 import authReducer from "@/store/slices/auth.slice";
 import { authenticationService } from "@/features/authentication";
 import { userService } from "@/services";
-import { categoryService } from "@/features/settings";
+import { categoryService, colorService } from "@/features/settings";
 
 export const store = configureStore({
   reducer: {
@@ -18,12 +18,14 @@ export const store = configureStore({
     [authenticationService.reducerPath]: authenticationService.reducer,
     [userService.reducerPath]: userService.reducer,
     [categoryService.reducerPath]: categoryService.reducer,
+    [colorService.reducerPath]: colorService.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
       authenticationService.middleware,
       userService.middleware,
-      categoryService.middleware
+      categoryService.middleware,
+      colorService.middleware
     ),
   devTools: process.env.NODE_ENV !== "production",
 });
