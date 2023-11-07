@@ -9,3 +9,4 @@ export { PageHeader } from "./page-header/page-header";
 export { withLoadable } from "./hoc/with-loadable";
 export { ActionMenu } from "./action-menu/action-menu";
 export { LoadingButton } from "./loading-button/loading-button";
+export { AppDataGrid } from "./app-data-grid/app-data-grid";

@@ -5,9 +5,8 @@ import {
   GridRowSelectionModel,
 } from "@mui/x-data-grid";
 import { useMemo } from "react";
-import { StyledDataGrid } from "@/features/settings/components/category/category.styled";
 import { CrudActions } from "@/types/common.type";
-import { ActionMenu } from "@/components";
+import { ActionMenu, AppDataGrid } from "@/components";
 
 type CategoryGridProps = CrudActions & {
   rows: Category[];
@@ -67,15 +66,10 @@ export const CategoryGrid = ({
   );
 
   return (
-    <StyledDataGrid
+    <AppDataGrid
       columns={columns}
       rows={rows}
-      autoHeight
-      checkboxSelection
-      disableRowSelectionOnClick
-      autoPageSize={false}
-      pageSizeOptions={[]}
-      loading={isLoading}
+      isLoading={isLoading}
       rowSelectionModel={rowSelectionModel}
       onRowSelectionModelChange={onRowSelectionModelChange}
     />
