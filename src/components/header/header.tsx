@@ -18,8 +18,15 @@ import {
 } from "@/store";
 import { User } from "@/types";
 import { stringAvatar } from "@/lib";
-import { Fragment, MouseEvent, useCallback, useMemo, useState } from "react";
-import { Logout, Settings } from "@mui/icons-material";
+import {
+  Fragment,
+  MouseEvent,
+  useCallback,
+  useContext,
+  useMemo,
+  useState,
+} from "react";
+import { DarkMode, LightMode, Logout, Settings } from "@mui/icons-material";
 import {
   listItemIconStyles,
   listItemStyles,
@@ -27,12 +34,15 @@ import {
 } from "@/components/header/header.styled";
 import { HeaderProps } from "@/components/header/header.type";
 import { useNavigate } from "react-router-dom";
+import { AppThemeContext } from "@/features/theme";
 
 export const Header = ({ toggleSidebar, sidebarIsOpen }: HeaderProps) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const user = useAppShallowEqualSelector(getUser) as User;
+
+  const { mode, toggleMode } = useContext(AppThemeContext);
 
   const [menuAnchorElement, setMenuAnchorElement] =
     useState<HTMLElement | null>(null);
@@ -72,6 +82,9 @@ export const Header = ({ toggleSidebar, sidebarIsOpen }: HeaderProps) => {
             <MenuIcon />
           </IconButton>
           <Box sx={{ flexGrow: 1 }} />
+          <IconButton sx={{ mr: 2 }} onClick={() => toggleMode()}>
+            {mode === "light" ? <DarkMode /> : <LightMode />}
+          </IconButton>
           <IconButton onClick={handleMenuOpen}>
             <Avatar {...stringAvatar(user.firstName + " " + user.lastName)} />
           </IconButton>
