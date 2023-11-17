@@ -5,7 +5,7 @@ import {
   GridRowSelectionModel,
 } from "@mui/x-data-grid";
 import { Color } from "@/features/settings/types/color.type";
-import { AppDataGrid } from "@/components";
+import { ActionMenu, AppDataGrid } from "@/components";
 import { useMemo } from "react";
 import { Box } from "@mui/material";
 
@@ -50,6 +50,19 @@ export const ColorGrid = ({
             }}
             width={20}
             height={20}
+          />
+        ),
+      },
+      {
+        field: "slug",
+        headerName: "",
+        align: "right",
+        flex: 1,
+        renderCell: (params: GridRenderCellParams) => (
+          <ActionMenu
+            editAction={editAction}
+            deleteAction={deleteAction}
+            id={+params.id}
           />
         ),
       },

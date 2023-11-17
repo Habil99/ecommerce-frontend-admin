@@ -30,6 +30,13 @@ export const colorService = createApi({
       }),
       invalidatesTags: ["colors"],
     }),
+    deleteColor: builder.mutation<Color, number>({
+      query: (id) => ({
+        url: `/settings/colors/${id}`,
+        method: HttpRequest.DELETE,
+      }),
+      invalidatesTags: ["colors"],
+    }),
   }),
 });
 
@@ -37,4 +44,5 @@ export const {
   useFindAllColorsQuery,
   useCreateColorMutation,
   useUpdateColorMutation,
+  useDeleteColorMutation,
 } = colorService;

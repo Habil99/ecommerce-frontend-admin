@@ -10,7 +10,10 @@ import {
 import { Delete } from "@mui/icons-material";
 import { Fragment, useEffect, useState } from "react";
 import { ColorGrid } from "@/features/settings/components/color/color.grid";
-import { useFindAllColorsQuery } from "@/features/settings/services/color.service";
+import {
+  useDeleteColorMutation,
+  useFindAllColorsQuery,
+} from "@/features/settings/services/color.service";
 import { GridRowSelectionModel } from "@mui/x-data-grid";
 import { fadeMixin } from "@/lib";
 import { ColorForm } from "./color-form";
@@ -20,6 +23,8 @@ const Color = () => {
   const { setBreadcrumbLinks } = useSettingOutlet();
 
   const { data: colors, isLoading: isFetchLoading } = useFindAllColorsQuery();
+  const [deleteCategory, { isLoading: isDeleteLoading }] =
+    useDeleteColorMutation();
 
   const [dialogIsOpen, setDialogIsOpen] = useState<boolean>(false);
   const [rowSelectionModel, setRowSelectionModel] =
@@ -54,13 +59,13 @@ const Color = () => {
         </Stack>
         <ColorGrid
           rows={colors}
-          isLoading={isFetchLoading}
+          isLoading={isFetchLoading || isDeleteLoading}
           rowSelectionModel={rowSelectionModel}
           onRowSelectionModelChange={(newRowSelectionModel) =>
             setRowSelectionModel(newRowSelectionModel)
           }
           editAction={() => {}}
-          deleteAction={() => {}}
+          deleteAction={deleteCategory}
         />
       </Box>
       <ColorForm
