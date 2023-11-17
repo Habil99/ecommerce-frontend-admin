@@ -25,7 +25,7 @@ export const colorService = createApi({
     updateColor: builder.mutation<Color, Pick<Color, "id" | "name" | "value">>({
       query: ({ id, name, value }) => ({
         url: `/settings/colors/${id}`,
-        method: HttpRequest.POST,
+        method: HttpRequest.PUT,
         data: { name, value },
       }),
       invalidatesTags: ["colors"],

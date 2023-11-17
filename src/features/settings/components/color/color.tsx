@@ -8,7 +8,7 @@ import {
   useTheme,
 } from "@mui/material";
 import { Delete } from "@mui/icons-material";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useCallback, useEffect, useState } from "react";
 import { ColorGrid } from "@/features/settings/components/color/color.grid";
 import {
   useDeleteColorMutation,
@@ -17,6 +17,8 @@ import {
 import { GridRowSelectionModel } from "@mui/x-data-grid";
 import { fadeMixin } from "@/lib";
 import { ColorForm } from "./color-form";
+import { Nullable } from "@/types";
+import { Color as ColorType } from "@/features/settings/types/color.type";
 
 const Color = () => {
   const theme = useTheme();
@@ -29,6 +31,19 @@ const Color = () => {
   const [dialogIsOpen, setDialogIsOpen] = useState<boolean>(false);
   const [rowSelectionModel, setRowSelectionModel] =
     useState<GridRowSelectionModel>([]);
+  const [colorInitialValues, setColorInitialValues] =
+    useState<Nullable<ColorType>>(null);
+
+  const editColor = useCallback(
+    (colorId: number) => {
+      const color = colors?.find((item) => item.id === colorId);
+      if (color) {
+        setColorInitialValues(color);
+        setDialogIsOpen(true);
+      }
+    },
+    [colors]
+  );
 
   useEffect(() => {
     setBreadcrumbLinks([
@@ -64,14 +79,14 @@ const Color = () => {
           onRowSelectionModelChange={(newRowSelectionModel) =>
             setRowSelectionModel(newRowSelectionModel)
           }
-          editAction={() => {}}
+          editAction={editColor}
           deleteAction={deleteCategory}
         />
       </Box>
       <ColorForm
         isOpen={dialogIsOpen}
         setIsOpen={setDialogIsOpen}
-        initialValues={null}
+        initialValues={colorInitialValues}
       />
     </Fragment>
   );
