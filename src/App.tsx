@@ -2,7 +2,6 @@ import "./App.css";
 import { Outlet } from "react-router-dom";
 import { Box, Container } from "@mui/material";
 import { Header, Sidebar } from "@/components";
-import { SIDEBAR_WIDTH } from "@/lib/constants";
 import { useCallback, useState } from "react";
 
 function App() {
@@ -17,18 +16,15 @@ function App() {
   }, []);
 
   return (
-    <Box display="flex" minHeight="100vh">
+    <Box display="flex" height="100vh">
       <Sidebar sidebarIsOpen={sidebarIsOpen} toggleSidebar={toggleSidebar} />
-      <Box
-        sx={{
-          marginLeft: `${SIDEBAR_WIDTH}px`,
-          flexGrow: 1,
-        }}
-      >
+      <Box display="flex" maxWidth="100%" flexGrow={1} flexDirection="column">
         <Header sidebarIsOpen={sidebarIsOpen} toggleSidebar={toggleSidebar} />
-        <Container maxWidth="lg" sx={{ marginTop: "80px" }}>
-          <Outlet />
-        </Container>
+        <Box sx={{ paddingTop: 4, paddingX: 3, flex: 1, overflowY: "auto" }}>
+          <Container maxWidth="lg">
+            <Outlet />
+          </Container>
+        </Box>
       </Box>
     </Box>
   );

@@ -73,7 +73,7 @@ export const Header = ({ toggleSidebar, sidebarIsOpen }: HeaderProps) => {
   return (
     <Fragment>
       <StyledAppBar
-        position="fixed"
+        position="static"
         elevation={0}
         sidebarIsOpen={sidebarIsOpen}
       >
