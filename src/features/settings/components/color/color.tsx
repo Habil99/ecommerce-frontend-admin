@@ -58,11 +58,10 @@ const Color = () => {
     <Fragment>
       <Box>
         <Stack justifyContent="space-between" flexDirection="row">
-          <Tooltip title="Delete all selected data, not implemented yet">
+          <Tooltip title="Not implemented yet">
             <IconButton
               color="error"
               sx={fadeMixin(rowSelectionModel.length > 0, theme)}
-              disabled
               // onClick={() => handleDeleteCategory()}
             >
               <Delete />

@@ -13,7 +13,7 @@ import {
 } from "@/features/settings/services/category.service";
 import { Fragment, useCallback, useEffect, useState } from "react";
 import { Delete } from "@mui/icons-material";
-import { fadeMixin } from "@/lib";
+import { fadeMixin, uuid } from "@/lib";
 import { CategoryGrid } from "@/features/settings/components/category/category.grid";
 import { Category as CategoryType } from "@/features/settings/types/category.type";
 import { CategoryForm } from "@/features/settings/components/category/category-form";
@@ -79,7 +79,7 @@ const Category = () => {
     <Fragment>
       <Box>
         <Stack justifyContent="space-between" flexDirection="row">
-          <Tooltip title="Delete all selected data">
+          <Tooltip title="Delete all selected data" id={uuid()}>
             <IconButton
               color="error"
               sx={fadeMixin(rowSelectionModel.length > 0, theme)}
